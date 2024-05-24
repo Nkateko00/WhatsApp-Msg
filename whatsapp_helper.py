@@ -36,10 +36,8 @@ class WhatsAppHelper:
             whatsapp_element = WebDriverWait(self.driver_obj,10).until(
                 EC.visibility_of_element_located((MobileBy.ACCESSIBILITY_ID, "WhatsApp"))
             )
-            # whatsapp_element = wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "WhatsApp")))
             whatsapp_element.click()
 
-    # Wait for the search input field to be visible
     def search_for_name(self,name):
         test_data = self.db_connection()
         search_input = WebDriverWait(self.driver_obj,10).until(
@@ -47,30 +45,27 @@ class WhatsAppHelper:
         )
         search_input.click()
         search_input.send_keys(test_data[1])  
+        search_input.submit()
+        
+    def click_search_result(self):
+        test_data = self.db_connection()
+        name = test_data[1]
+        contact_element = WebDriverWait(self.driver_obj,10).until(
+            EC.visibility_of_element_located((MobileBy.ACCESSIBILITY_ID, name))
+        )
+        contact_element.click()
 
-    # search_input = wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search")))
-    # search_input.click()
-
-    # # Enter the phone number
-    # phone_number = "1234567890"
-    # search_input.send_keys(phone_number)
-
-    # Wait for the contact to be displayed and click on it
-    # def
-    # contact_element = wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, phone_number)))
-    # contact_element.click()
-
-    # # Send a message
-    # message_input = driver.find_element(MobileBy.ACCESSIBILITY_ID, "Write a message...")
-    # message_input.send_keys("Hello, this is an automated message from Appium!")
-
-    # Click the send button
-    def send_msg(self):
+    def send_msg(self,message):
+        test_data = self.db_connection()
+        msg_input = WebDriverWait(self.driver_obj,10).until(
+            EC.visibility_of_element_located((MobileBy.ACCESSIBILITY_ID,"Write a message..."))
+        )
+        msg_input.send_keys(test_data[2])
+  
+    def click_send_msg(self):
         send_button = WebDriverWait(self.driver_obj,10).until(
             EC.visibility_of_element_located((MobileBy.ACCESSIBILITY_ID, "Send")))
-        # send_button = driver.find_element(MobileBy.ACCESSIBILITY_ID, "Send")
         send_button.click()
 
-    # Quit the Appium driver
     def close_app(self):
         self.driver_obj.quit()
