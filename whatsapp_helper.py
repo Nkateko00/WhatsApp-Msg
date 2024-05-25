@@ -35,7 +35,7 @@ class WhatsAppHelper:
     
     def verify_execution_time(self,start_hour,end_hour):
         #checks if time is between  7 & 10 pm
-        if self.current_time.hour >= start_hour and  self.current_time.hour <=end_hour:
+        if self.current_time.hour >= start_hour and self.current_time.hour <= end_hour:
             return True
         else:
             return False
